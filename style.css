@@ -1,0 +1,141 @@
+/* Light mode (default) */
+:root {
+  --bg-color: white;
+  --text-color: black;
+  --sidebar-bg: #f1f1f1;
+  --sidebar-text: #333;
+  --button-bg: white;
+  --button-text: black;
+}
+
+/* Dark mode */
+.dark-mode {
+  --bg-color: #1e1e1e;
+  --text-color: #f0f0f0;
+  --sidebar-bg: rgb(37, 37, 37);
+  --sidebar-text: #ccc;
+  --button-bg: #1e1e1e;
+  --button-text: white;
+}
+
+#themeToggle {
+  position: fixed;      
+  top: 20px;
+  right: 20px;          
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: 2px solid var(--button-text);
+  border-radius: 8px;    
+  z-index: 1001;         
+  transition: all 0.3s ease;
+}
+
+p{
+  font-size: 18px;
+}
+
+#themeToggle:hover {
+  transform: scale(1.05); 
+  background-color: var(--button-text); 
+  color: var(--button-bg);
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+/* Sidebar + open button*/
+.sidebar {
+    background-color: var(--sidebar-bg);
+    position: fixed;
+    width: 0px;
+    height: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    transition: 0.18s;
+    overflow-x: hidden; 
+ }
+
+.sidebar a {
+  color: var(--sidebar-text);;
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  display: block;
+  transition: 0.18s;
+ }
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+span.openbtn {
+  background-color: var(--sidebar-bg);
+  color: var(--sidebar-text);
+  border: 1px solid var(--sidebar-text);
+  position: fixed;  
+  top: 20px;        
+  left: 0px;       
+  font-size: 18px;
+  cursor: pointer;
+  padding: 10px 15px;
+  z-index: 1000;   
+  transition: background-color 0.3s;
+}
+
+span:hover {
+  background-color: rgb(190, 190, 190);
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* Main section*/
+#main {
+  transition: margin-left .5s;
+  padding: 20px;
+}
+section {
+  min-height: 100vh;
+  padding: 40px;
+}
+.quizButton{
+  background-color: var(--button-bg);
+  border: 2px solid var(--button-text);
+  color: var(--button-text);
+  border: 0px;
+  font-size: 16px;
+  margin-top: 10px;
+  border-radius: 4px;
+  height: 30px;
+  width: 60px;
+}
+
+/* Correct answer highlight*/
+.correct {
+  background-color: #d4edda; 
+  color: #155724; 
+}
+
+/* Wrong answer highlight*/
+.wrong {
+  background-color: #f8d7da; 
+  color: #721c24; 
+}
+
+/* Unanswered highlight*/
+.unanswered {
+  background-color: #fff3cd; 
+  color: #856404; 
+}

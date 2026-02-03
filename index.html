@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>CAS project</title>
+  </head>
+
+  <body>
+    <button id="themeToggle">Dark Mode</button>
+
+    <!-- Sidebar-->
+
+    <div id="mySidenav" class="sidebar">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+        >&times;</a
+      >
+      <a href="#about">About</a>
+      <a href="#functions">Functions of the circulatory system</a>
+      <a href="#vessels">Arteries, Veins, capillaries + gas exchange</a>
+      <a href="#heart">Anatomy of the heart</a>
+      <a href="#quiz">A final quiz</a>
+    </div>
+
+    <span class="openbtn" onclick="openNav()">open</span>
+
+    <!-- Main page-->
+
+    <div id="main" class="main">
+      <section id="about">
+        <h1>About</h1>
+        <p>
+          CAS project of four ISD students. IDK Ill figure out what to put here
+        </p>
+      </section>
+
+      <section id="functions">
+        <h1>Functions of the Circulatory System</h1>
+        <p>
+          The circulatory system transports oxygen, nutrients, and waste
+          products.
+        </p>
+      </section>
+
+      <section id="vessels">
+        <h1>Arteries, Veins, Capillaries + Gas Exchange</h1>
+      </section>
+
+      <section id="heart">
+        <h1>Anatomy of the Heart</h1>
+      </section>
+
+      <section id="quiz">
+        <h1>Final Quiz</h1>
+        <form id="quizForm">
+          <!-- Question 1 -->
+          <p>
+            <strong
+              >1. What is the main function of the circulatory system?</strong
+            >
+          </p>
+          <label
+            ><input type="radio" name="q1" value="a" /> To digest food</label
+          ><br />
+          <label
+            ><input type="radio" name="q1" value="b" /> To transport oxygen and
+            nutrients</label
+          ><br />
+          <label
+            ><input type="radio" name="q1" value="c" /> To control
+            movement</label
+          ><br /><br />
+          <!-- Question 2 -->
+          <p>
+            <strong
+              >2. Which blood components are carried by the circulatory
+              system?</strong
+            >
+          </p>
+          <label
+            ><input type="checkbox" name="q2" value="a" /> Red blood
+            cells</label
+          ><br />
+          <label><input type="checkbox" name="q2" value="b" /> Platelets</label
+          ><br />
+          <label><input type="checkbox" name="q2" value="c" /> Bones</label
+          ><br />
+          <!-- Question 3-->
+          <p>
+            <strong
+              >3. Name the main artery that carries blood from the
+              heart:</strong
+            >
+          </p>
+          <input type="text" id="q3" />
+          <!-- Question 4-->
+          <p>
+            <strong
+              >4. Select the blood vessel that carries blood away from the
+              heart:</strong
+            >
+          </p>
+          <select id="q4">
+            <option value="">--Choose--</option>
+            <option value="vein">Vein</option>
+            <option value="artery">Artery</option>
+            <option value="capillary">Capillary</option>
+          </select>
+          <!-- Question 5-->
+          <p>
+            <strong
+              >5. The heart pumps blood throughout the body.
+              (True/False)</strong
+            >
+          </p>
+          <label><input type="radio" name="q5" value="true" /> True</label
+          ><br />
+          <label><input type="radio" name="q5" value="false" /> False</label
+          ><br />
+          <button type="button" class="quizButton" onclick="checkQuiz()">
+            Submit
+          </button>
+        </form>
+
+        <p id="result"></p>
+        <script src="quiz.js"></script>
+        <script src="general.js"></script>
+      </section>
+    </div>
+  </body>
+</html>
