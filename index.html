@@ -1,132 +1,331 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <title>CAS project</title>
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cardiovascular System - CAS Project</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f0f0f0;
+      transition: background 0.3s, color 0.3s;
+      scroll-behavior: smooth;
+    }
 
-  <body>
-    <button id="themeToggle">Dark Mode</button>
+    /* Intro screen */
+    #introScreen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: #1e1e1e;
+      color: white;
+      font-size: 4rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 1000;
+      transition: opacity 0.7s, transform 0.7s;
+      text-align: center;
+    }
+    #introScreen.fade-out {
+      opacity: 0;
+      transform: translateY(-1000px);
+      pointer-events: none;
+    }
 
-    <!-- Sidebar-->
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 0;
+      height: 100%;
+      background: #111;
+      overflow-x: hidden;
+      transition: width 0.3s, opacity 0.3s;
+      opacity: 0;
+      z-index: 999;
+      padding-top: 60px;
+    }
+    .sidebar.show {
+      width: 250px;
+      opacity: 1;
+    }
+    .sidebar a {
+      display: block;
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .sidebar a:hover { color: #f1f1f1; }
+    .sidebar .closebtn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 2rem;
+    }
 
-    <div id="mySidenav" class="sidebar">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
-        >&times;</a
-      >
-      <a href="#about">About</a>
-      <a href="#functions">Functions of the circulatory system</a>
-      <a href="#vessels">Arteries, Veins, capillaries + gas exchange</a>
-      <a href="#heart">Anatomy of the heart</a>
-      <a href="#quiz">A final quiz</a>
+    .openbtn {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      z-index: 1000;
+      font-size: 1rem;
+      padding: 10px 15px;
+      cursor: pointer;
+      background: #1e1e1e;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+    .openbtn:hover { background: #333; }
+
+    /* Cards */
+    section {
+      margin: 40px auto;
+      padding: 20px;
+      max-width: 800px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    section:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); }
+
+    h1 { text-align: center; margin-bottom: 20px; }
+    #chamberTooltip {
+      display: none;
+      position: absolute;
+      background: rgba(0,0,0,0.8);
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    /* Dark mode */
+    .dark-mode { background: #121212; color: white; }
+    .dark-mode section { background: #1e1e1e; color: #fff; }
+  </style>
+</head>
+<body>
+
+<!-- Intro -->
+<div id="introScreen">Cardiovascular System</div>
+
+<!-- Sidebar -->
+<div id="mySidenav" class="sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#about">About</a>
+  <a href="#heartBasics">Heart Basics</a>
+  <a href="#bloodFlow">Blood & Oxygen</a>
+  <a href="#interactiveDemo">Interactive Demo</a>
+  <a href="#quiz">Quiz</a>
+</div>
+<button class="openbtn" onclick="openNav()">☰ Menu</button>
+
+<!-- Main -->
+<div id="main">
+  <!-- About -->
+<section id="about">
+    <h1>About</h1>
+    <p>The circulatory system moves blood, oxygen, and nutrients throughout your body. Red = oxygen-rich, Blue = oxygen-poor.</p>
+  </section>
+
+  <!-- Heart Basics -->
+<section id="heartBasics">
+    <h1>Heart Basics</h1>
+    <p>There are four chambers in the heart. Hover over each to learn its function:</p>
+
+    <div id="heartGrid" style="display:grid; grid-template-columns:repeat(2,150px); grid-template-rows:repeat(2,150px); gap:20px; justify-content:center;">
+      <div class="heart-part" data-info="Right Atrium: receives deoxygenated blood from the body" style="background:#4b79ff; color:white;">RA</div>
+      <div class="heart-part" data-info="Left Atrium: receives oxygenated blood from lungs" style="background:#ff4b5c; color:white;">LA</div>
+      <div class="heart-part" data-info="Right Ventricle: pumps blood to lungs" style="background:#4b79ff; color:white;">RV</div>
+      <div class="heart-part" data-info="Left Ventricle: pumps oxygenated blood to body" style="background:#ff4b5c; color:white;">LV</div>
     </div>
 
-    <span class="openbtn" onclick="openNav()">open</span>
+    <!-- tooltip -->
+    <div id="chamberTooltip"></div>
+  </section>
 
-    <!-- Main page-->
-
-    <div id="main" class="main">
-      <section id="about">
-        <h1>About</h1>
-        <p>
-          CAS project of four ISD students. IDK Ill figure out what to put here
-        </p>
-      </section>
-
-      <section id="functions">
-        <h1>Functions of the Circulatory System</h1>
-        <p>
-          The circulatory system transports oxygen, nutrients, and waste
-          products.
-        </p>
-      </section>
-
-      <section id="vessels">
-        <h1>Arteries, Veins, Capillaries + Gas Exchange</h1>
-      </section>
-
-      <section id="heart">
-        <h1>Anatomy of the Heart</h1>
-      </section>
-
-      <section id="quiz">
-        <h1>Final Quiz</h1>
-        <form id="quizForm">
-          <!-- Question 1 -->
-          <p>
-            <strong
-              >1. What is the main function of the circulatory system?</strong
-            >
-          </p>
-          <label
-            ><input type="radio" name="q1" value="a" /> To digest food</label
-          ><br />
-          <label
-            ><input type="radio" name="q1" value="b" /> To transport oxygen and
-            nutrients</label
-          ><br />
-          <label
-            ><input type="radio" name="q1" value="c" /> To control
-            movement</label
-          ><br /><br />
-          <!-- Question 2 -->
-          <p>
-            <strong
-              >2. Which blood components are carried by the circulatory
-              system?</strong
-            >
-          </p>
-          <label
-            ><input type="checkbox" name="q2" value="a" /> Red blood
-            cells</label
-          ><br />
-          <label><input type="checkbox" name="q2" value="b" /> Platelets</label
-          ><br />
-          <label><input type="checkbox" name="q2" value="c" /> Bones</label
-          ><br />
-          <!-- Question 3-->
-          <p>
-            <strong
-              >3. Name the main artery that carries blood from the
-              heart:</strong
-            >
-          </p>
-          <input type="text" id="q3" />
-          <!-- Question 4-->
-          <p>
-            <strong
-              >4. Select the blood vessel that carries blood away from the
-              heart:</strong
-            >
-          </p>
-          <select id="q4">
-            <option value="">--Choose--</option>
-            <option value="vein">Vein</option>
-            <option value="artery">Artery</option>
-            <option value="capillary">Capillary</option>
-          </select>
-          <!-- Question 5-->
-          <p>
-            <strong
-              >5. The heart pumps blood throughout the body.
-              (True/False)</strong
-            >
-          </p>
-          <label><input type="radio" name="q5" value="true" /> True</label
-          ><br />
-          <label><input type="radio" name="q5" value="false" /> False</label
-          ><br />
-          <button type="button" class="quizButton" onclick="checkQuiz()">
-            Submit
-          </button>
-        </form>
-
-        <p id="result"></p>
-        <script src="quiz.js"></script>
-        <script src="general.js"></script>
-      </section>
+  <!-- You can add more sections like Blood Flow, Interactive Demo, Quiz as cards -->
+   <!-- Quiz Section -->
+<section id="quiz">
+  <h1>Quiz</h1>
+  <form id="quizForm">
+    <!-- Question 1: Radio -->
+    <div>
+      <p>1. The right atrium receives blood from the:</p>
+      <label><input type="radio" name="q1" value="a"> Lungs</label><br>
+      <label><input type="radio" name="q1" value="b"> Body</label><br>
+      <label><input type="radio" name="q1" value="c"> Left Ventricle</label>
     </div>
-  </body>
+
+    <!-- Question 2: Checkbox -->
+    <div>
+      <p>2. Which are part of the circulatory system?</p>
+      <label><input type="checkbox" name="q2" value="a"> Heart</label><br>
+      <label><input type="checkbox" name="q2" value="b"> Blood vessels</label><br>
+      <label><input type="checkbox" name="q2" value="c"> Lungs</label>
+    </div>
+
+    <!-- Question 3: Text -->
+    <div>
+      <p>3. The main artery leaving the heart is the:</p>
+      <input type="text" id="q3">
+    </div>
+
+    <!-- Question 4: Select -->
+    <div>
+      <p>4. Blood leaving the heart through the aorta goes into the:</p>
+      <select id="q4">
+        <option value="">Select</option>
+        <option value="artery">Artery</option>
+        <option value="vein">Vein</option>
+        <option value="capillary">Capillary</option>
+      </select>
+    </div>
+
+    <!-- Question 5: Radio -->
+    <div>
+      <p>5. Oxygen-rich blood leaves the heart? (True/False)</p>
+      <label><input type="radio" name="q5" value="true"> True</label><br>
+      <label><input type="radio" name="q5" value="false"> False</label>
+    </div>
+
+    <button type="button" onclick="checkQuiz()" class="quizButton">Submit</button>
+  </form>
+  <div id="result" style="margin-top:10px; font-weight:bold;"></div>
+</section>
+</div>
+
+<script>
+  // Intro fade
+  const intro = document.getElementById("introScreen");
+  intro.addEventListener("click", ()=>intro.classList.add("fade-out"));
+
+  // Sidebar toggle
+  const sidenav = document.getElementById("mySidenav");
+  function openNav(){ sidenav.classList.add("show"); }
+  function closeNav(){ sidenav.classList.remove("show"); }
+
+  // Heart tooltips follow mouse
+  const parts = document.querySelectorAll(".heart-part");
+  const tooltip = document.getElementById("chamberTooltip");
+  parts.forEach(part=>{
+    part.addEventListener("mousemove", e=>{
+      tooltip.innerText = part.dataset.info;
+      tooltip.style.display = "block";
+
+      let x = e.pageX + 15;
+      let y = e.pageY + 15;
+      const rect = tooltip.getBoundingClientRect();
+      if(x + rect.width > window.innerWidth) x = e.pageX - rect.width - 15;
+      if(y + rect.height > window.innerHeight) y = e.pageY - rect.height - 15;
+
+      tooltip.style.left = x + "px";
+      tooltip.style.top = y + "px";
+    });
+    part.addEventListener("mouseout", ()=>tooltip.style.display="none");
+  });
+
+  function checkQuiz() {
+  const questions = [
+    { type: "radio", name: "q1", correct: "b" },
+    { type: "checkbox", name: "q2", correct: ["a", "b"] },
+    { type: "text", id: "q3", correct: "aorta" },
+    { type: "select", id: "q4", correct: "artery" },
+    { type: "radio", name: "q5", correct: "true" }
+  ];
+
+  let score = 0;
+  let unanswered = [];
+
+  // Clear previous highlights
+  document.querySelectorAll("#quizForm input, #quizForm select").forEach(el => {
+    el.classList.remove("correct", "wrong", "unanswered");
+    if(el.parentElement) el.parentElement.classList.remove("correct", "wrong", "unanswered");
+  });
+
+  // Check each question
+  questions.forEach((q, i) => {
+    if (q.type === "radio") {
+      const selected = document.querySelector(`input[name="${q.name}"]:checked`);
+      if (!selected) {
+        unanswered.push(i+1);
+        document.querySelectorAll(`input[name="${q.name}"]`).forEach(el => el.parentElement.classList.add("unanswered"));
+      } else if (selected.value === q.correct) {
+        score++;
+        selected.parentElement.classList.add("correct");
+      } else {
+        selected.parentElement.classList.add("wrong");
+        document.querySelector(`input[name="${q.name}"][value="${q.correct}"]`)?.parentElement.classList.add("correct");
+      }
+    } 
+    else if (q.type === "checkbox") {
+      const checkboxes = Array.from(document.querySelectorAll(`input[name="${q.name}"]`));
+      const selected = checkboxes.filter(c => c.checked).map(c => c.value);
+      if (selected.length === 0) {
+        unanswered.push(i+1);
+        checkboxes.forEach(c => c.parentElement.classList.add("unanswered"));
+      } else {
+        checkboxes.forEach(c => {
+          if (q.correct.includes(c.value) && c.checked) c.parentElement.classList.add("correct");
+          else if (!q.correct.includes(c.value) && c.checked) c.parentElement.classList.add("wrong");
+          else if (q.correct.includes(c.value) && !c.checked) c.parentElement.classList.add("correct");
+        });
+        if (selected.length === q.correct.length && selected.every(v => q.correct.includes(v))) score++;
+      }
+    } 
+    else if (q.type === "text") {
+      const input = document.getElementById(q.id);
+      const val = input.value.trim().toLowerCase();
+      if (!val) {
+        unanswered.push(i+1);
+        input.classList.add("unanswered");
+      } else if (val === q.correct.toLowerCase()) {
+        score++;
+        input.classList.add("correct");
+      } else input.classList.add("wrong");
+    } 
+    else if (q.type === "select") {
+      const select = document.getElementById(q.id);
+      if (!select.value) {
+        unanswered.push(i+1);
+        select.classList.add("unanswered");
+      } else if (select.value === q.correct) {
+        score++;
+        select.classList.add("correct");
+      } else select.classList.add("wrong");
+    }
+  });
+
+  if (unanswered.length > 0) {
+    alert("Please answer all questions before submitting. Unanswered: " + unanswered.join(", "));
+    return;
+  }
+
+  // Feedback based on score
+  let feedback = "";
+  if (score === 5) feedback = "Excellent! Perfect score (quiz was easy asf ngl , nothing to be proud of ) 🎉";
+  else if (score >= 4) feedback = "imagine not being able to answer easy ass questions haha ";
+  else if (score >= 3) feedback = "get better 😬";
+  else if (score >= 2) feedback = "GET OUT";
+  else feedback = "Quit studying";
+
+  document.getElementById("result").innerHTML = `You scored <strong>${score}</strong> out of ${questions.length}.<br>${feedback}`;
+}
+
+
+</script>
+</body>
 </html>
