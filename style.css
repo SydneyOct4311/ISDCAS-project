@@ -169,7 +169,7 @@ body {
         text-align: center;
         margin-bottom: 20px;
       }
-      #chamberTooltip {
+      #Tooltip {
         display: none;
         position: absolute;
         background: rgba(0, 0, 0, 0.8);
@@ -183,45 +183,51 @@ body {
 
 
 /* Heart Grid */
-#heartGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 150px);
-  grid-template-rows: repeat(2, 150px);
-  gap: 20px;
-  justify-content: center;
-  position: relative; /* important for tooltip positioning */
+.heart-container {
+    position: relative;
+    width: 300px;
+    margin: auto;
 }
 
-/* Heart parts */
-.heart-part {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #fff0f0;
-  color: #000;
-  border: 2px solid #ff4b5c;
-  border-radius: 10px;
-  cursor: pointer;
-  padding: 15px 20px;
-  transition: transform 0.2s, background 0.2s;
+.heart-image {
+    width: 100%;
+    display: block;
 }
-.heart-part:hover {
-  transform: scale(1.1);
-  background: #ffe5e5;
+
+.hotspot {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: #ff3b3b;
+    border: 3px solid white;
+    border-radius: 50%;
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+    transition: transform 0.2s;
 }
+.hotspot:hover {
+    transform: translate(-50%, -50%) scale(1.3);
+}
+
 
 /* Tooltip */
-#chamberTooltip {
-  display: none;
-  position: fixed;  /* change from absolute */
-  background: rgba(0,0,0,0.8);
-  color: white;
-  padding: 6px 10px;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  pointer-events: none;
-  z-index: 1000;
-  max-width: 250px;
+#tooltip {
+    position: fixed;
+    display: none;
+
+    background: rgba(0,0,0,0.85);
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+
+    max-width: 220px;
+    font-size: 14px;
+
+    pointer-events: none;
+    z-index: 99999;
+
+    left: 0;
+    top: 0;
 }
 
 /* Heart diagram blood cell */
