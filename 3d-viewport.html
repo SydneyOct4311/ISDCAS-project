@@ -39,48 +39,6 @@
     </style>
   </head>
   <body>
-    <!--
-      Unused: this standalone iframe-based viewport was superseded by the
-      inline #viewport3D overlay in index.html (see style.css and
-      src/3d-scene.js). Kept here, disabled, in case it's needed again —
-      commented out (rather than deleted) so Vite's dependency scanner
-      doesn't try to resolve its now-broken "3d-scene.js" import (the real
-      scene script lives at /src/3d-scene.js) and so it isn't picked up as
-      a second page entry point.
 
-    <div class="ui-overlay">
-      <h2>3D Circulatory Explorer</h2>
-      <p>Controls: Drag to rotate | Right-click to pan | Scroll to zoom</p>
-    </div>
-
-    <button class="exit-btn" onclick="window.parent.close3DModal()">✕ Exit 3D View</button>
-
-    <div id="canvas-container"></div>
-
-    <script type="importmap">
-      {
-        "imports": {
-          "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-          "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
-        }
-      }
-    </script>
-    <script type="module" src="3d-scene.js"></script>
-    <script>
-      // Function to close via Parent window
-      function exitViewer() {
-        if (window.parent && window.parent.close3DModal) {
-          window.parent.close3DModal();
-        }
-      }
-
-      // Listen for ESC key press
-      window.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-          exitViewer();
-        }
-      });
-    </script>
-    -->
   </body>
 </html>
