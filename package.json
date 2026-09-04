@@ -1,0 +1,19 @@
+{
+  "name": "isdcas-project-main",
+  "version": "1.0.0",
+  "description": "",
+  "main": "3d-scene.js",
+  "scripts": {
+  "dev": "vite"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+ 
+  "dependencies": {
+    "three": "^0.185.1"
+  },
+  "devDependencies": {
+    "vite": "^8.1.5"
+  }
+}

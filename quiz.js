@@ -10,12 +10,12 @@ function checkQuiz() {
   let score = 0;
   let unanswered = [];
 
-  // Clear previous highlights
+  // clear old highlights
   document.querySelectorAll("#quizForm input, #quizForm select").forEach(el => {
     el.classList.remove("correct", "wrong", "unanswered");
     if(el.parentElement) el.parentElement.classList.remove("correct", "wrong", "unanswered");
   });
-  //Checks the type of each question
+  // check each question by its type
   questions.forEach((q, i) => {
     if (q.type === "radio") {
       const selected = document.querySelector(`input[name="${q.name}"]:checked`);

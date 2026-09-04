@@ -11,31 +11,53 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- Intro -->
+    <!-- intro -->
     <div id="introScreen">
       Cardiovascular System
       <p id="introSubtext">Click to continue</p>
     </div>
 
-    <button class="openbtn" onclick="openNav()">☰ Menu</button>
+    <!-- one bar for every screen size — below ~880px the links drop into the
+      drawer. theme toggle lives here so it cant collide with page content -->
+    <header id="siteNav" class="site-nav">
+      <button class="openbtn" type="button" onclick="openNav()" aria-label="Open menu">
+        ☰ <span class="openbtn-text">Menu</span>
+      </button>
 
-    <!-- Sidebar -->
+      <span class="site-nav-brand">Cardiovascular System</span>
+
+      <nav class="site-nav-links" aria-label="Sections">
+        <a href="#Thecirculatorysystem">Circulatory system</a>
+        <a href="#theheart">Heart</a>
+        <a href="#bloodvessels">Blood vessels</a>
+        <a href="#bloodflowpathway">Blood flow</a>
+        <a href="#gasexchange">Gas exchange</a>
+        <a href="#quiz">Quiz</a>
+      </nav>
+
+      <button id="themeToggle" type="button">Dark Mode</button>
+
+      <!-- reading progress -->
+      <div class="nav-progress" aria-hidden="true">
+        <div class="nav-progress-bar"></div>
+      </div>
+    </header>
+
+    <!-- the drawer, same order as the page -->
     <div id="mySidenav" class="sidebar">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
         >&times;</a
       >
       <a href="#Thecirculatorysystem">The Circulatory system</a>
-      <a href="#bloodvessels">Blood vessels</a>
       <a href="#theheart">Heart</a>
+      <a href="#bloodvessels">Blood vessels</a>
       <a href="#bloodflowpathway">Blood flow pathway</a>
       <a href="#gasexchange">Gas Exchange</a>
       <a href="#quiz">Quiz</a>
     </div>
-
-    <button id="themeToggle">Dark Mode</button>
-    <!-- Main -->
+    <!-- main -->
     <div id="main">
-     <!-- Circulatory system -->
+     <!-- circulatory system -->
 
       <section id="Thecirculatorysystem">
         <h1>The Circulatory system</h1>
@@ -61,7 +83,25 @@
           4. Removes CO2 and wastes. <br />
           5. Connects the body system together<br />
         </p>
+        <!-- stage keeps the cards space while the slot is expanded -->
+        <div class="model-stage" data-model="circulatory-system">
+          <div
+            class="model-slot"
+            data-model="circulatory-system"
+            data-title="Circulatory System"
+            data-caption="The full transport network — heart, arteries and veins reaching every part of the body."
+          >
+            <div class="slot-loader">
+              <div class="slot-loader-track"><div class="slot-loader-bar"></div></div>
+            </div>
+            <button type="button" class="slot-expand" title="Expand (Esc to close)">
+              <span aria-hidden="true">⛶</span> Expand
+            </button>
+            <p class="slot-hint" aria-hidden="true">Drag to rotate</p>
+          </div>
+        </div>
       </section>
+   
       <section id="theheart">
         <h1>The heart</h1>
         <p>
@@ -76,52 +116,24 @@
           Keep in mind that when drawing the heart, the left and right are
           flipped.
         </p>
-        <p>Hover over parts of the heart to see its name and function</p>
-
-        <div class="heart-container">
-          <img
-            src="assets/images/Heart-structure.jpg"
-            alt="Heart Diagram"
-            class="heart-image"
-          />
-
-          <!-- Right Atrium -->
+        <!-- stage keeps the cards space while the slot is expanded -->
+        <div class="model-stage" data-model="beating-heart">
           <div
-            class="hotspot"
-            style="top: 52%; left: 30%"
-            data-info="Right Atrium: Receives deoxygenated blood returning from the body."
-          ></div>
-
-          <!-- Left Atrium -->
-          <div
-            class="hotspot"
-            style="top: 42%; left: 67%"
-            data-info="Left Atrium: Receives oxygenated blood from the lungs."
-          ></div>
-
-          <!-- Right Ventricle -->
-          <div
-            class="hotspot"
-            style="top: 72%; left: 52%"
-            data-info="Right Ventricle: Pumps deoxygenated blood to the lungs."
-          ></div>
-
-          <!-- Left Ventricle -->
-          <div
-            class="hotspot"
-            style="top: 72%; left: 78%"
-            data-info="Left Ventricle: Pumps oxygenated blood to the body through the aorta."
-          ></div>
-          <!-- Septum -->
-          <div
-            class="hotspot"
-            style="top: 82%; left: 66%"
-            data-info="Septum: Thick wall of muscle that separates the left and right sides of the heart. It prevents oxygenated blood and deoxygenated blood from mixing."
-          ></div>
+            class="model-slot"
+            data-model="beating-heart"
+            data-title="The Beating Heart"
+            data-caption="A real cardiac cycle — watch the chambers contract and relax as they pump blood."
+          >
+            <div class="slot-loader">
+              <div class="slot-loader-track"><div class="slot-loader-bar"></div></div>
+            </div>
+            <button type="button" class="slot-expand" title="Expand (Esc to close)">
+              <span aria-hidden="true">⛶</span> Expand
+            </button>
+            <p class="slot-hint" aria-hidden="true">Drag to rotate</p>
+          </div>
         </div>
-        <div id="tooltip"></div>
       </section>
-      <!-- Heart Basics -->
       <section id="bloodvessels">
         <h1>Blood vessels</h1>
         <p>
@@ -161,12 +173,220 @@
           4. Collects blood waste
         </p>
 
-        <!-- tooltip -->
         <div id="chamberTooltip"></div>
+
+        <!-- stage keeps the cards space while the slot is expanded -->
+        <div class="model-stage" data-model="circulatory-system">
+          <div
+            class="model-slot"
+            data-model="circulatory-system"
+            data-title="Blood Vessels"
+            data-caption="Arteries, veins and capillaries branching out from the heart across the whole body."
+          >
+            <div class="slot-loader">
+              <div class="slot-loader-track"><div class="slot-loader-bar"></div></div>
+            </div>
+            <button type="button" class="slot-expand" title="Expand (Esc to close)">
+              <span aria-hidden="true">⛶</span> Expand
+            </button>
+            <p class="slot-hint" aria-hidden="true">Drag to rotate</p>
+          </div>
+        </div>
       </section>
       <section id="bloodflowpathway">
         <h1>Blood flow pathway</h1>
-        <p></p>
+        <p>
+          Blood does not travel around the body in one big loop. It goes
+          through the heart <strong>twice</strong> on every full circuit, which
+          is why we call it a <strong>double circulatory system</strong>. One
+          loop is short and goes to the lungs to pick up oxygen. The other is
+          long and delivers that oxygen to the rest of the body.
+        </p>
+
+        <h2>The pulmonary circuit (heart &rarr; lungs &rarr; heart)</h2>
+        <p>
+          This is the short loop, and its job is to collect oxygen and get rid
+          of carbon dioxide.
+        </p>
+        <p>
+          1. Deoxygenated blood returns from the body through the vena cava.<br />
+          2. It enters the <strong>right atrium</strong>.<br />
+          3. It passes down through a valve into the <strong>right
+          ventricle</strong>.<br />
+          4. The right ventricle pumps it out through the <strong>pulmonary
+          artery</strong> to the lungs.<br />
+          5. In the lungs it drops off CO&#8322; and picks up oxygen.<br />
+          6. Oxygenated blood returns to the heart through the <strong>pulmonary
+          veins</strong>.
+        </p>
+
+        <h2>The systemic circuit (heart &rarr; body &rarr; heart)</h2>
+        <p>
+          This is the long loop, and its job is to deliver oxygen and nutrients
+          to every cell in the body.
+        </p>
+        <p>
+          1. Oxygenated blood from the lungs enters the <strong>left
+          atrium</strong>.<br />
+          2. It passes down through a valve into the <strong>left
+          ventricle</strong>.<br />
+          3. The left ventricle pumps it out through the <strong>aorta</strong>
+          at high pressure.<br />
+          4. Arteries carry it to the organs, then split into capillaries.<br />
+          5. Cells take the oxygen and nutrients, and pass back CO&#8322; and
+          waste.<br />
+          6. Veins carry the deoxygenated blood back to the vena cava, and the
+          whole thing starts again.
+        </p>
+
+        <h2>Things worth remembering</h2>
+        <p>
+          &bull; The <strong>right</strong> side of the heart handles
+          deoxygenated blood; the <strong>left</strong> side handles oxygenated
+          blood. The septum keeps them apart.<br />
+          &bull; Blood always enters the heart at an <strong>atrium</strong> and
+          leaves from a <strong>ventricle</strong>.<br />
+          &bull; The left ventricle has the thickest wall, because it has to
+          push blood all the way around the body &mdash; the right ventricle
+          only has to reach the lungs.<br />
+          &bull; The pulmonary artery is the one artery carrying
+          <em>deoxygenated</em> blood, and the pulmonary vein is the one vein
+          carrying <em>oxygenated</em> blood. They are the exception to the
+          usual rule.<br />
+          &bull; Valves make sure blood only ever moves one way.
+        </p>
+
+        <!-- the pathway as one loop — 6 stops in flow order nd no lines
+          crossing. pulmonary artery goes up between the atria like it actually does -->
+        <figure class="flow-figure">
+          <p class="flow-key">
+            <span class="flow-key-item flow-key-item--deoxy">Deoxygenated blood</span>
+            <span class="flow-key-item flow-key-item--oxy">Oxygenated blood</span>
+          </p>
+
+          <p class="flow-swipe" aria-hidden="true">
+            Swipe the diagram sideways to follow the whole loop
+          </p>
+
+          <div class="flow-scroll">
+            <svg
+              class="flow-svg"
+              viewBox="0 0 720 600"
+              role="img"
+              aria-labelledby="flowTitle flowDesc"
+            >
+              <title id="flowTitle">Double circulation pathway</title>
+              <desc id="flowDesc">
+                Blood travels in one loop through six stops. From the right
+                atrium it passes to the right ventricle, which pumps it along
+                the pulmonary artery to the lungs. There it gives up carbon
+                dioxide and picks up oxygen. The pulmonary veins carry it to
+                the left atrium, then the left ventricle pumps it along the
+                aorta to the body, where cells take the oxygen. The vena cava
+                returns it to the right atrium and the loop repeats.
+              </desc>
+
+              <defs>
+                <marker id="headDeoxy" viewBox="0 0 10 10" refX="8" refY="5"
+                        markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="var(--flow-deoxy)" />
+                </marker>
+                <marker id="headOxy" viewBox="0 0 10 10" refX="8" refY="5"
+                        markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="var(--flow-oxy)" />
+                </marker>
+              </defs>
+
+              <!-- vessels first so the boxes sit on top of the ends -->
+              <g fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M270,553 H50 V266 H140"
+                      stroke="var(--flow-deoxy)" marker-end="url(#headDeoxy)" />
+                <path d="M300,389 H340 V76"
+                      stroke="var(--flow-deoxy)" marker-end="url(#headDeoxy)" />
+                <path d="M450,43 H670 V266 H580"
+                      stroke="var(--flow-oxy)" marker-end="url(#headOxy)" />
+                <path d="M580,389 H640 V553 H450"
+                      stroke="var(--flow-oxy)" marker-end="url(#headOxy)" />
+
+                <!-- atrium down into ventricle -->
+                <path d="M220,304 V344" stroke="var(--flow-deoxy)" marker-end="url(#headDeoxy)" />
+                <path d="M500,304 V344" stroke="var(--flow-oxy)" marker-end="url(#headOxy)" />
+              </g>
+
+              <!-- the heart box round the 4 chambers -->
+              <rect x="100" y="190" width="520" height="270" rx="18"
+                    fill="none" stroke="var(--flow-frame)" stroke-width="2"
+                    stroke-dasharray="7 6" />
+              <text class="flow-frame-label" x="116" y="214">THE HEART</text>
+              <line x1="390" y1="214" x2="390" y2="432"
+                    stroke="var(--flow-frame)" stroke-width="2" stroke-dasharray="5 6" />
+              <text class="flow-septum" x="390" y="450">septum</text>
+
+              <!-- stops in flow order -->
+              <g class="flow-node flow-node--deoxy">
+                <rect x="140" y="228" width="160" height="76" rx="12" />
+                <circle class="flow-badge" cx="140" cy="228" r="15" />
+                <text class="flow-badge-num" x="140" y="233">1</text>
+                <text class="flow-node-name" x="220" y="264">Right atrium</text>
+                <text class="flow-node-sub" x="220" y="288">from the body</text>
+              </g>
+
+              <g class="flow-node flow-node--deoxy">
+                <rect x="140" y="348" width="160" height="82" rx="12" />
+                <circle class="flow-badge" cx="140" cy="348" r="15" />
+                <text class="flow-badge-num" x="140" y="353">2</text>
+                <text class="flow-node-name" x="220" y="384">Right ventricle</text>
+                <text class="flow-node-sub" x="220" y="408">pumps to the lungs</text>
+              </g>
+
+              <g class="flow-node flow-node--swap">
+                <rect x="270" y="10" width="180" height="66" rx="12" />
+                <circle class="flow-badge" cx="270" cy="10" r="15" />
+                <text class="flow-badge-num" x="270" y="15">3</text>
+                <text class="flow-node-name" x="360" y="40">Lungs</text>
+                <text class="flow-node-sub" x="360" y="62">CO&#8322; out, oxygen in</text>
+              </g>
+
+              <g class="flow-node flow-node--oxy">
+                <rect x="420" y="228" width="160" height="76" rx="12" />
+                <circle class="flow-badge" cx="420" cy="228" r="15" />
+                <text class="flow-badge-num" x="420" y="233">4</text>
+                <text class="flow-node-name" x="500" y="264">Left atrium</text>
+                <text class="flow-node-sub" x="500" y="288">from the lungs</text>
+              </g>
+
+              <g class="flow-node flow-node--oxy">
+                <rect x="420" y="348" width="160" height="82" rx="12" />
+                <circle class="flow-badge" cx="420" cy="348" r="15" />
+                <text class="flow-badge-num" x="420" y="353">5</text>
+                <text class="flow-node-name" x="500" y="384">Left ventricle</text>
+                <text class="flow-node-sub" x="500" y="408">pumps to the body</text>
+              </g>
+
+              <g class="flow-node flow-node--swap">
+                <rect x="270" y="520" width="180" height="66" rx="12" />
+                <circle class="flow-badge" cx="270" cy="520" r="15" />
+                <text class="flow-badge-num" x="270" y="525">6</text>
+                <text class="flow-node-name" x="360" y="550">Body cells</text>
+                <text class="flow-node-sub" x="360" y="572">oxygen out, CO&#8322; in</text>
+              </g>
+
+              <!-- vessel names -->
+              <text class="flow-vessel flow-vessel--deoxy" x="64" y="492">Vena cava</text>
+              <text class="flow-vessel flow-vessel--deoxy" x="356" y="150">Pulmonary artery</text>
+              <text class="flow-vessel flow-vessel--oxy" x="656" y="150" text-anchor="end">Pulmonary veins</text>
+              <text class="flow-vessel flow-vessel--oxy" x="626" y="492" text-anchor="end">Aorta</text>
+            </svg>
+          </div>
+
+          <figcaption class="flow-caption">
+            One loop, two circuits. Steps 1&ndash;3 are the
+            <b>pulmonary circuit</b>, which collects oxygen. Steps 4&ndash;6 are
+            the <b>systemic circuit</b>, which delivers it. The blood changes
+            colour at the only two places it swaps gases: the lungs and the
+            body.
+          </figcaption>
+        </figure>
       </section>
       <section id="gasexchange">
         <h1>Gas Exchange</h1>
@@ -181,13 +401,29 @@
           collects oxygen before returning as oxygenated blood to the left
           atrium through the pulmonary veins.
         </p>
+
+        <!-- stage keeps the cards space while the slot is expanded -->
+        <div class="model-stage" data-model="heart-lungs">
+          <div
+            class="model-slot"
+            data-model="heart-lungs"
+            data-title="Heart &amp; Lungs"
+            data-caption="Where the pulmonary circuit meets the alveoli and gas exchange actually happens."
+          >
+            <div class="slot-loader">
+              <div class="slot-loader-track"><div class="slot-loader-bar"></div></div>
+            </div>
+            <button type="button" class="slot-expand" title="Expand (Esc to close)">
+              <span aria-hidden="true">⛶</span> Expand
+            </button>
+            <p class="slot-hint" aria-hidden="true">Drag to rotate</p>
+          </div>
+        </div>
       </section>
-      <!-- You can add more sections like Blood Flow, Interactive Demo, Quiz as cards -->
-      <!-- Quiz Section -->
       <section id="quiz">
         <h1>Quiz</h1>
         <form id="quizForm">
-          <!-- Question 1: Radio -->
+          <!-- q1 radio -->
           <div>
             <p>1. The right atrium receives blood from the:</p>
             <label><input type="radio" name="q1" value="a" /> Lungs</label
@@ -198,7 +434,7 @@
             >
           </div>
 
-          <!-- Question 2: Checkbox -->
+          <!-- q2 checkbox -->
           <div>
             <p>2. Which are part of the circulatory system?</p>
             <label><input type="checkbox" name="q2" value="a" /> Heart</label
@@ -210,13 +446,13 @@
             <label><input type="checkbox" name="q2" value="c" /> Lungs</label>
           </div>
 
-          <!-- Question 3: Text -->
+          <!-- q3 text -->
           <div>
             <p>3. The main artery leaving the heart is the:</p>
             <input type="text" id="q3" />
           </div>
 
-          <!-- Question 4: Select -->
+          <!-- q4 select -->
           <div>
             <p>4. Blood leaving the heart through the aorta goes into the:</p>
             <select id="q4">
@@ -227,7 +463,7 @@
             </select>
           </div>
 
-          <!-- Question 5: Radio -->
+          <!-- q5 radio -->
           <div>
             <p>5. Oxygen-rich blood leaves the heart? (True/False)</p>
             <label><input type="radio" name="q5" value="true" /> True</label
@@ -242,8 +478,63 @@
         <div id="result" style="margin-top: 10px; font-weight: bold"></div>
       </section>
     </div>
+
+    <!-- one webgl canvas for the whole page — each visible model is drawn into
+      its own rectangle wherever its slot is. slots handle the dragging -->
+    <canvas id="sceneCanvas"></canvas>
+
+    <!-- dims the page behind an expanded model -->
+    <div id="viewportBackdrop"></div>
+
+    <!-- expanded mode ui. sibling of the canvas not a parent — a child can
+      never escape its parents stacking context -->
+    <div id="viewportChrome" aria-hidden="true">
+      <div id="viewportLabels" hidden></div>
+
+      <div class="viewport-ui">
+        <div class="viewport-topbar">
+          <div class="info">
+            <h2 id="viewportTitle">3D Model</h2>
+            <p id="viewportCaption"></p>
+          </div>
+          <button id="exit3dBtn" type="button" class="exit-btn" title="Close (Esc)">
+            <span aria-hidden="true">✕</span> Close <kbd>ESC</kbd>
+          </button>
+        </div>
+
+        <div class="viewport-bottombar">
+          <div class="viewport-hints">
+            <span><b>Drag</b> rotate</span>
+            <span><b>Right-drag</b> / two-finger pan</span>
+            <span><b>Scroll</b> / pinch zoom</span>
+          </div>
+
+          <div class="viewport-tools" role="group" aria-label="Model controls">
+            <button type="button" class="tool-btn" data-action="reset" title="Reset view (R)">
+              <span aria-hidden="true">⟲</span> Reset
+            </button>
+            <button type="button" class="tool-btn" data-action="autorotate" aria-pressed="false" title="Auto-rotate (A)">
+              <span aria-hidden="true">↻</span> Auto-rotate
+            </button>
+            <button type="button" class="tool-btn" data-action="animation" aria-pressed="true" title="Play/pause animation (Space)">
+              <span aria-hidden="true">⏸</span> <span class="tool-label">Pause</span>
+            </button>
+            <button type="button" class="tool-btn" data-action="labels" aria-pressed="true" title="Show labels (L)" hidden>
+              <span aria-hidden="true">🏷</span> Labels
+            </button>
+            <button type="button" class="tool-btn" data-action="wireframe" aria-pressed="false" title="Wireframe (W)">
+              <span aria-hidden="true">⊞</span> Wireframe
+            </button>
+            <button type="button" class="tool-btn" data-action="fullscreen" title="Fullscreen (F)">
+              <span aria-hidden="true">⛶</span> Fullscreen
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="general.js"></script>
     <script src="quiz.js"></script>
-    <script src="heart-basics.js"></script>
+    <script type="module" src="/src/3d-scene.js"></script>
   </body>
 </html>
