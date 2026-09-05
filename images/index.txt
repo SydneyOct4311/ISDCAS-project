@@ -1,8 +1,8 @@
-FEATURE IMAGES — verified against the code on 2026-09-01
+FEATURE IMAGES - verified against the code on 2026-09-01
 =========================================================
 One image per ADDED feature in "ISDCAS-project-main copy/CHANGELOG.txt";
 features with several relevant blocks get feature N(2), N(3), ...
-Every image shows real, unedited lines with true line numbers — all 15
+Every image shows real, unedited lines with true line numbers - all 15
 features were verified present in the code before rendering.
 
 IMAGE               SOURCE LINES              WHAT IT SHOWS

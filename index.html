@@ -17,7 +17,7 @@
       <p id="introSubtext">Click to continue</p>
     </div>
 
-    <!-- one bar for every screen size — below ~880px the links drop into the
+    <!-- one bar for every screen size - below ~880px the links drop into the
       drawer. theme toggle lives here so it cant collide with page content -->
     <header id="siteNav" class="site-nav">
       <button class="openbtn" type="button" onclick="openNav()" aria-label="Open menu">
@@ -62,12 +62,12 @@
       <section id="Thecirculatorysystem">
         <h1>The Circulatory system</h1>
         <p>
-          The circulatory system is the body’s transport network. Its main job
+          The circulatory system is the body's transport network. Its main job
           is to continuously pump blood around the body so that cells receive
           the materials they need to survive. Blood carries oxygen, glucose,
           nutrients, hormones, and other important substances to body cells. At
           the same time, it removes waste products such as carbon dioxide
-          (CO₂).<br />
+          (CO2).<br />
           Think of the circulatory system like a giant highway system. The heart
           acts as the central pump station, while the blood vessels are the
           roads that allow blood to travel everywhere in the body. <br />
@@ -89,7 +89,7 @@
             class="model-slot"
             data-model="circulatory-system"
             data-title="Circulatory System"
-            data-caption="The full transport network — heart, arteries and veins reaching every part of the body."
+            data-caption="The full transport network - heart, arteries and veins reaching every part of the body."
           >
             <div class="slot-loader">
               <div class="slot-loader-track"><div class="slot-loader-bar"></div></div>
@@ -122,7 +122,7 @@
             class="model-slot"
             data-model="beating-heart"
             data-title="The Beating Heart"
-            data-caption="A real cardiac cycle — watch the chambers contract and relax as they pump blood."
+            data-caption="A real cardiac cycle - watch the chambers contract and relax as they pump blood."
           >
             <div class="slot-loader">
               <div class="slot-loader-track"><div class="slot-loader-bar"></div></div>
@@ -215,7 +215,7 @@
           ventricle</strong>.<br />
           4. The right ventricle pumps it out through the <strong>pulmonary
           artery</strong> to the lungs.<br />
-          5. In the lungs it drops off CO&#8322; and picks up oxygen.<br />
+          5. In the lungs it drops off CO2 and picks up oxygen.<br />
           6. Oxygenated blood returns to the heart through the <strong>pulmonary
           veins</strong>.
         </p>
@@ -233,7 +233,7 @@
           3. The left ventricle pumps it out through the <strong>aorta</strong>
           at high pressure.<br />
           4. Arteries carry it to the organs, then split into capillaries.<br />
-          5. Cells take the oxygen and nutrients, and pass back CO&#8322; and
+          5. Cells take the oxygen and nutrients, and pass back CO2 and
           waste.<br />
           6. Veins carry the deoxygenated blood back to the vena cava, and the
           whole thing starts again.
@@ -256,7 +256,7 @@
           &bull; Valves make sure blood only ever moves one way.
         </p>
 
-        <!-- the pathway as one loop — 6 stops in flow order nd no lines
+        <!-- the pathway as one loop - 6 stops in flow order nd no lines
           crossing. pulmonary artery goes up between the atria like it actually does -->
         <figure class="flow-figure">
           <p class="flow-key">
@@ -344,7 +344,7 @@
                 <circle class="flow-badge" cx="270" cy="10" r="15" />
                 <text class="flow-badge-num" x="270" y="15">3</text>
                 <text class="flow-node-name" x="360" y="40">Lungs</text>
-                <text class="flow-node-sub" x="360" y="62">CO&#8322; out, oxygen in</text>
+                <text class="flow-node-sub" x="360" y="62">CO2 out, oxygen in</text>
               </g>
 
               <g class="flow-node flow-node--oxy">
@@ -368,7 +368,7 @@
                 <circle class="flow-badge" cx="270" cy="520" r="15" />
                 <text class="flow-badge-num" x="270" y="525">6</text>
                 <text class="flow-node-name" x="360" y="550">Body cells</text>
-                <text class="flow-node-sub" x="360" y="572">oxygen out, CO&#8322; in</text>
+                <text class="flow-node-sub" x="360" y="572">oxygen out, CO2 in</text>
               </g>
 
               <!-- vessel names -->
@@ -479,14 +479,14 @@
       </section>
     </div>
 
-    <!-- one webgl canvas for the whole page — each visible model is drawn into
+    <!-- one webgl canvas for the whole page - each visible model is drawn into
       its own rectangle wherever its slot is. slots handle the dragging -->
     <canvas id="sceneCanvas"></canvas>
 
     <!-- dims the page behind an expanded model -->
     <div id="viewportBackdrop"></div>
 
-    <!-- expanded mode ui. sibling of the canvas not a parent — a child can
+    <!-- expanded mode ui. sibling of the canvas not a parent - a child can
       never escape its parents stacking context -->
     <div id="viewportChrome" aria-hidden="true">
       <div id="viewportLabels" hidden></div>

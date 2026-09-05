@@ -2,7 +2,7 @@
 const intro = document.getElementById("introScreen");
 const toggleButton = document.getElementById("themeToggle");
 
-// body class not inline styles — inline display wud override the media
+// body class not inline styles - inline display wud override the media
 // queries tht swap the nav links nd the menu btn around at diff widths
 intro.addEventListener("click", () => {
   intro.classList.add("fade-out");
@@ -43,7 +43,7 @@ document
   .querySelectorAll("#mySidenav a[href^='#']")
   .forEach((link) => link.addEventListener("click", closeNav));
 
-// nav bar — progress bar + highlighting the section ur in
+// nav bar - progress bar + highlighting the section ur in
 
 const progressBar = document.querySelector(".nav-progress-bar");
 const navLinks = Array.from(document.querySelectorAll(".site-nav-links a"));

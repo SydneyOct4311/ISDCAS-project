@@ -5,7 +5,7 @@ import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { clone as cloneSkinned } from 'three/addons/utils/SkeletonUtils.js';
 
-// inline 3d models — each .model-slot draws right on the card thru ONE shared
+// inline 3d models - each .model-slot draws right on the card thru ONE shared
 // canvas (a scissor rect per slot, browsers only allow a few webgl contexts).
 // expanding = the slot just grows nd the model grows with it. glbs r meshopt
 // compressed so the decoder has to be registered.
@@ -29,7 +29,7 @@ const MODELS = {
     // labels off for now
     /*
     // at = a point in the models own space, grabbed by clicking with ?pick on
-    // — real surface hits not guesses
+    // - real surface hits not guesses
     labels: [
       {
         text: 'Aorta',
@@ -47,7 +47,7 @@ const MODELS = {
         text: 'Pulmonary artery',
         at: [0.033, 0.141, 0.008],
         facing: [0.487, 0.123, 0.865],
-        info: 'Carries deoxygenated blood from the right ventricle to the lungs — the one artery that does not carry oxygenated blood.',
+        info: 'Carries deoxygenated blood from the right ventricle to the lungs - the one artery that does not carry oxygenated blood.',
       },
       {
         text: 'Right atrium',
@@ -113,7 +113,7 @@ const MODELS = {
         text: 'Right lung',
         at: [-0.033, 0.031, -0.001],
         facing: [-0.636, 0.541, 0.55],
-        info: 'At the end of the smallest branches sit the alveoli — tiny air sacs wrapped in capillaries, where gas exchange actually happens.',
+        info: 'At the end of the smallest branches sit the alveoli - tiny air sacs wrapped in capillaries, where gas exchange actually happens.',
       },
       {
         text: 'Left lung',
@@ -190,7 +190,7 @@ function initRenderer() {
   renderer.toneMappingExposure = 1.05;
   renderer.setScissorTest(true);
 
-  // env map made once nd shared by every slot — without it these pbr models
+  // env map made once nd shared by every slot - without it these pbr models
   // look like flat plastic
   const pmrem = new THREE.PMREMGenerator(renderer);
   environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
@@ -217,7 +217,7 @@ function getLoader() {
 
 /* ----- loading ----- */
 
-// fetch nd parse each model once no matter how many slots want it — copies
+// fetch nd parse each model once no matter how many slots want it - copies
 // share the geometry/textures
 function loadSource(key, onProgress) {
   if (modelCache.has(key)) return Promise.resolve(modelCache.get(key));
@@ -228,7 +228,7 @@ function loadSource(key, onProgress) {
     getLoader().load(
       config.url,
       (gltf) => {
-        // loader gives the scene back without world matrices — settle them
+        // loader gives the scene back without world matrices - settle them
         // once so clones dont copy stale ones
         gltf.scene.updateMatrixWorld(true);
 
@@ -249,7 +249,7 @@ function loadSource(key, onProgress) {
   return request;
 }
 
-// SkeletonUtils.clone not a plain clone — a plain one leaves every copy bound
+// SkeletonUtils.clone not a plain clone - a plain one leaves every copy bound
 // to the og skeleton so theyd all beat in sync
 function instantiate(key, source) {
   const root = cloneSkinned(source.scene);
@@ -270,14 +270,14 @@ function instantiate(key, source) {
 
 /* ----- measuring nd framing ----- */
 
-// box of everything still visible. cant use Box3.setFromObject — it ignores
+// box of everything still visible. cant use Box3.setFromObject - it ignores
 // visible=false nd uses the bind pose for skinned meshes (the heart is authored
 // tiny nd blown up by its bones, the naive box puts the camera inside it)
 function boxOfVisible(object, box = new THREE.Box3()) {
   const meshBox = new THREE.Box3();
   box.makeEmpty();
 
-  // updateMatrixWorld not updateWorldMatrix — only this one refreshes the
+  // updateMatrixWorld not updateWorldMatrix - only this one refreshes the
   // skinned meshes bindMatrixInverse, skip it nd the box comes out 100x too small
   object.updateWorldMatrix(true, false); // parents first
   object.updateMatrixWorld(true);
@@ -303,7 +303,7 @@ function boxOfVisible(object, box = new THREE.Box3()) {
   return box;
 }
 
-// hide the junk baked into the exports — stray geo far frm the focus node
+// hide the junk baked into the exports - stray geo far frm the focus node
 // (wud balloon the bounding box) plus the named duds in hide[]
 function prepareVisibility(root, config) {
   root.children.forEach((child) => {
@@ -333,7 +333,7 @@ function prepareVisibility(root, config) {
 }
 
 // measure nd recentre the model. for animated ones the box is a union of poses
-// across the clip — fitting the resting pose alone crops the heart when it beats
+// across the clip - fitting the resting pose alone crops the heart when it beats
 function measureSlot(slot) {
   const { root, config, mixer } = slot;
 
@@ -378,7 +378,7 @@ function frameSlot(slot, aspect) {
   const halfFov = THREE.MathUtils.degToRad(camera.fov) / 2;
   const halfHeight = size.y / 2;
 
-  // use the footprint diagonal — u can orbit all the way round so it has to
+  // use the footprint diagonal - u can orbit all the way round so it has to
   // fit at any heading, nd deep models project bigger up close
   const halfSpan = Math.hypot(size.x, size.z) / 2;
 
@@ -416,7 +416,7 @@ function createSlot(el) {
 
   const scene = new THREE.Scene();
   scene.environment = environment;
-  // no background — canvas clears transparent so the card shows thru
+  // no background - canvas clears transparent so the card shows thru
 
   // lights cant be shared between scenes but theyre cheap
   const key1 = new THREE.DirectionalLight(0xffffff, 2.0);
@@ -465,7 +465,7 @@ function createSlot(el) {
   return slot;
 }
 
-// inline the model must never steal page scroll — pan-y gives vertical swipes
+// inline the model must never steal page scroll - pan-y gives vertical swipes
 // back to the browser (orbitcontrols sets touch-action none), wheel zoom off too
 function applyInlineControls(slot) {
   const { controls } = slot;
@@ -485,7 +485,7 @@ function applyExpandedControls(slot) {
   controls.domElement.style.touchAction = 'none';
 }
 
-// load a slots model — runs once when it first nears view
+// load a slots model - runs once when it first nears view
 function startSlot(slot) {
   if (slot.started) return;
   slot.started = true;
@@ -580,7 +580,7 @@ function tick(timestamp) {
 
 /* ----- expanding a slot ----- */
 
-// freeze scroll without moving anything — overflow hidden removes the scrollbar
+// freeze scroll without moving anything - overflow hidden removes the scrollbar
 // which shifts the layout, so pad the body by the same width
 function lockScroll() {
   const barWidth = window.innerWidth - document.documentElement.clientWidth;
@@ -593,7 +593,7 @@ function unlockScroll() {
   document.body.style.paddingRight = '';
 }
 
-// expanding builds nothing new — the slot just grows to fill the window nd the
+// expanding builds nothing new - the slot just grows to fill the window nd the
 // model grows with it. the stage keeps the cards height so the page doesnt jump
 function expandSlot(slot) {
   if (expanded || !slot.root) return;
@@ -602,7 +602,7 @@ function expandSlot(slot) {
   const sidenav = document.getElementById('mySidenav');
   if (sidenav) sidenav.classList.remove('show');
 
-  // lock first then measure — locking can still move the page
+  // lock first then measure - locking can still move the page
   lockScroll();
   const rect = slot.el.getBoundingClientRect();
 
@@ -616,7 +616,7 @@ function expandSlot(slot) {
   buildExpandedLabels(slot);
   syncExpandedToolbar(slot);
 
-  // move the slot out to body — position fixed breaks if an ancestor has a
+  // move the slot out to body - position fixed breaks if an ancestor has a
   // transform nd the card lifts on hover, so the slot wud grow towards the
   // cards bounds instead of the screens. class first so its fixed b4 it lands
   slot.el.classList.add('is-expanded');
@@ -661,7 +661,7 @@ function collapseSlot() {
   canvas.classList.remove('is-expanded');
   unlockScroll();
 
-  // measure only now — scroll lock is off so this is where the slot actually
+  // measure only now - scroll lock is off so this is where the slot actually
   // lands. stage not parentElement bc the slot is still on body rn
   const rect = slot.stage.getBoundingClientRect();
 
@@ -676,7 +676,7 @@ function collapseSlot() {
     slot.el.classList.remove('is-expanded', 'is-settled');
     slot.el.removeAttribute('style');
     slot.stage.appendChild(slot.el); // back into the card
-    // deliberately not re-framed — keeps whatever u rotated/zoomed to
+    // deliberately not re-framed - keeps whatever u rotated/zoomed to
   };
 
   if (PREFERS_REDUCED_MOTION) {
@@ -712,7 +712,7 @@ const _camDir = new THREE.Vector3();
 const _facing = new THREE.Vector3();
 const _toAnchor = new THREE.Vector3();
 
-// labels r built on expand nd thrown away on collapse — inline theyd be unreadable
+// labels r built on expand nd thrown away on collapse - inline theyd be unreadable
 function buildExpandedLabels(slot) {
   clearExpandedLabels();
   const labels = slot.config.labels || [];
@@ -764,7 +764,7 @@ function updateExpandedLabels() {
 
     let behind;
     if (facing) {
-      // surface normal is the honest test — a chamber wall seen thru the
+      // surface normal is the honest test - a chamber wall seen thru the
       // cutaway faces the camera even tho its behind the centre
       _facing.copy(facing).transformDirection(anchor.matrixWorld);
       behind = _facing.dot(_camDir) > 0.15;
@@ -775,7 +775,7 @@ function updateExpandedLabels() {
 
     _labelPos.project(camera);
 
-    // fully behind the camera — park it so the projection doesnt mirror it back
+    // fully behind the camera - park it so the projection doesnt mirror it back
     if (_labelPos.z > 1) {
       el.style.opacity = '0';
       return;
@@ -924,7 +924,7 @@ function init() {
 
     if (slot.expandBtn) {
       // orbitcontrols captures the pointer on pointerdown so clicks never
-      // reach the btn — stop it bubbling nd the click lands normally
+      // reach the btn - stop it bubbling nd the click lands normally
       slot.expandBtn.addEventListener('pointerdown', (e) => e.stopPropagation());
       slot.expandBtn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -992,7 +992,7 @@ function init() {
   });
 
   if (PICK_MODE) {
-    console.log('3D: label picker on — click a model to log a point.');
+    console.log('3D: label picker on - click a model to log a point.');
   }
 
   renderer.setAnimationLoop(tick);

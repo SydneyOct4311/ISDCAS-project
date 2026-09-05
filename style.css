@@ -97,7 +97,7 @@ body.dark-mode {
       pointer-events: none;
     }
 
-/* on html not body — html is what actually scrolls so this never worked on body */
+/* on html not body - html is what actually scrolls so this never worked on body */
 html {
   scroll-behavior: smooth;
 }
@@ -169,7 +169,7 @@ body {
   color: var(--button-text);
       }
 
-/* nav bar — sticky not fixed so it takes real space nd the first card
+/* nav bar - sticky not fixed so it takes real space nd the first card
    isnt hidden under it. hidden til the intro is dismissed */
 
 .site-nav {
@@ -190,7 +190,7 @@ body.intro-done .site-nav {
   display: flex;
 }
 
-/* nav is NOT hidden while a model is expanded — its under the backdrop anyway,
+/* nav is NOT hidden while a model is expanded - its under the backdrop anyway,
    nd display none wud shift the whole page right when the slot pins itself */
 
 .site-nav-brand {
@@ -326,7 +326,7 @@ section[id] {
   box-sizing: border-box;
 }
 
-/* inline 3d models — one transparent canvas fixed over the page nd each model
+/* inline 3d models - one transparent canvas fixed over the page nd each model
    drawn into its slots rect (src/3d-scene.js). a slot is just an empty box */
 
 #sceneCanvas {
@@ -378,7 +378,7 @@ section[id] {
   opacity: 0.6;
 }
 
-/* expanding — the slot itself grows to fill the window nd the model grows
+/* expanding - the slot itself grows to fill the window nd the model grows
    with it, no second canvas nd u keep the view u had */
 
 .model-slot.is-expanded {
@@ -521,7 +521,7 @@ body.viewport3d-open #viewportChrome {
   opacity: 1;
 }
 
-/* scroll lock removes the scrollbar — js adds matching padding so nothing shifts */
+/* scroll lock removes the scrollbar - js adds matching padding so nothing shifts */
 body.viewport3d-open {
   overflow: hidden;
 }
@@ -708,7 +708,7 @@ body.viewport3d-open {
   }
 }
 
-/* anatomy labels — html chips positioned frm 3d anchor points, kept in html
+/* anatomy labels - html chips positioned frm 3d anchor points, kept in html
    so the text stays sharp at any zoom */
 
 #viewportLabels {
@@ -814,7 +814,7 @@ body.viewport3d-open {
 }
 
 
-/* blood flow diagram — svg loop, colours come frm the theme variables so it
+/* blood flow diagram - svg loop, colours come frm the theme variables so it
    follows the light/dark toggle */
 
 .flow-figure {

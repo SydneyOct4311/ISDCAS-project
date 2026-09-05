@@ -1,4 +1,4 @@
-CODE SHOTS — the actual code behind each added feature
+CODE SHOTS - the actual code behind each added feature
 ======================================================
 Every image is a screenshot of real, unedited lines from this project, with
 the true line numbers in the gutter so you can open the file and find them.
@@ -22,7 +22,7 @@ FILE                            ADDED   SOURCE
 14-flow-diagram-svg.png          12     index.html:304-347
 
 The caption under each block explains what the code does and, where it
-applies, which bug it fixed — the same fixes listed under ERRORS FIXED in
+applies, which bug it fixed - the same fixes listed under ERRORS FIXED in
 ../CHANGELOG.txt.
 
 Images are 2400px wide (2x retina), so they stay sharp when pasted into a
