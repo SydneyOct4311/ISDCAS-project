@@ -952,3 +952,27 @@ body.viewport3d-open {
   line-height: 1.6;
   opacity: 0.8;
 }
+
+/* Interesting facts*/
+.importantfact { 
+  margin: 30px 0; 
+  padding: 18px 22px; 
+  background: #f0f8ff; 
+  border-left: 5px solid #2878c8; 
+  border-radius: 12px; 
+}
+
+.fact-title { 
+  display: block; 
+  margin-bottom: 6px; 
+  font-size: 13px; 
+  font-weight: bold; 
+  letter-spacing: 1px; 
+  color: #36414c; 
+}
+
+.interesting-fact p { 
+  margin: 0; 
+  font-size: 17px; 
+  line-height: 1.5; 
+}
