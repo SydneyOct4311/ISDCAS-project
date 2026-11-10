@@ -65,37 +65,124 @@ body.dark-mode {
 /* intro screen */
 #introScreen {
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background-color: var(--button-bg);
-  color: var(--button-text);
-  font-size: 4rem;
+  inset: 0;
   display: flex;
-  flex-direction: column;       /* stack title and subtext vertically */
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  gap: clamp(20px, 5vw, 70px);
+  padding: 32px;
+  background: #fff;
+  color: #111;
   cursor: pointer;
   z-index: 1000;
-  transition: opacity 0.7s, transform 0.7s;
-  text-align: center;
+  overflow: hidden;
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.intro-text {
+  position: relative;
+  min-width: 0;
+  text-align: left;
+}
+
+.intro-eyebrow {
+  margin: 0 0 14px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #ff6b81;
+  animation: intro-rise 0.7s ease both;
+}
+
+/* clamp so it doesnt overflow on a phone */
+.intro-title {
+  margin: 0;
+  max-width: 11ch;
+  text-align: left;
+  font-size: clamp(2.1rem, 5.5vw, 3.9rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  animation: intro-rise 0.7s 0.08s ease both;
+}
+
+.intro-title::after {
+  content: "";
+  display: block;
+  width: 72px;
+  height: 3px;
+  margin: 22px 0 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ff4757, #ff6b81);
+}
+
+.intro-tagline {
+  margin: 22px 0 0;
+  max-width: 32ch;
+  font-size: clamp(0.95rem, 1.6vw, 1.08rem);
+  line-height: 1.55;
+  color: rgba(17, 17, 17, 0.62);
+  animation: intro-rise 0.7s 0.16s ease both;
 }
 
 #introSubtext {
-  font-size: 1.5rem;
-  margin-top: 20px;
-  color: #ccc;                  /* lighter for contrast */
-  animation: blink 5s infinite; /* blinks every 5s */
+  margin: 34px 0 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(17, 17, 17, 0.5);
+  animation: intro-rise 0.7s 0.24s ease both,
+             intro-pulse 2.8s 1s ease-in-out infinite;
 }
 
-@keyframes blink {
-  0%, 50%, 100% { opacity: 1; }
-  25%, 75% { opacity: 0; }
+/* the model render */
+.intro-art {
+  position: relative;
+  width: clamp(200px, 30vw, 400px);
+  max-height: 78vh;
+  object-fit: contain;
+  animation: intro-rise 0.9s 0.1s ease both;
 }
-    #introScreen.fade-out {
-      opacity: 0;
-      transform: translateY(-1000px);
-      pointer-events: none;
-    }
+
+@keyframes intro-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* gentle breathe, not the old on/off blink */
+@keyframes intro-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.45; }
+}
+
+#introScreen.fade-out {
+  opacity: 0;
+  transform: translateY(-24px);
+  pointer-events: none;
+}
+
+/* stack on narrow screens, art on top */
+@media (max-width: 760px) {
+  #introScreen {
+    flex-direction: column-reverse;
+    justify-content: center;
+    gap: 18px;
+    text-align: center;
+  }
+
+  .intro-text { text-align: center; }
+  .intro-tagline { max-width: 28ch; margin-left: auto; margin-right: auto; }
+  .intro-title { max-width: none; text-align: center; }
+  .intro-title::after { margin: 18px auto 0; }
+  .intro-art { width: min(52vw, 230px); max-height: 34vh; }
+  #introSubtext { margin-top: 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-eyebrow, .intro-title, .intro-tagline, #introSubtext, .intro-art {
+    animation: none;
+  }
+}
 
 /* on html not body - html is what actually scrolls so this never worked on body */
 html {
