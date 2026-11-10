@@ -708,6 +708,18 @@
 
     <script src="general.js"></script>
     <script src="quiz.js"></script>
+    <!-- tells the browser where "three" lives, so the 3d models also load
+      when the page is opened without npm (eg live server). npm run dev and
+      the build ignore this and use the copy in node_modules. keep the
+      version the same as package.json -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.185.1/examples/jsm/"
+        }
+      }
+    </script>
     <script type="module" src="/src/3d-scene.js"></script>
   </body>
 </html>
